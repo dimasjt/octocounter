@@ -25,7 +25,8 @@ module Octocounter
 
     def print_to_screen
       rows = calculate.map do |item|
-        [item[:files], File.open(item[:file]).read[1..100], item[:count]]
+        content = File.open(item[:file]).read.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')[0..100]
+        [item[:files], content, item[:count]]
       end
       puts Terminal::Table.new headings: ["Files", "Content", "Count"], rows: rows, style: { all_separators: true }
     end
