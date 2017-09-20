@@ -6,6 +6,7 @@ module Octocounter
     attr_accessor :path
 
     def initialize(path)
+      path = "#{path}/" unless path.match(/\/$/)
       @path = path
     end
 
