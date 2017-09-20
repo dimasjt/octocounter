@@ -7,7 +7,13 @@
 
 ## Usage
 
+* show biggest count
+
 `$ octocounter path/to/directory`
+
+* show all list files
+
+`$ octocounter path/to/directory --all`
 
 ## Result
 
