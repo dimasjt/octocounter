@@ -25,10 +25,11 @@ module Octocounter
       command :run do |c|
         c.syntax = "octocounter path/to/directory"
         c.description = DESCRIPTION
-        c.action do |args|
+        c.option '--all', String, "Show all list"
+        c.action do |args, options|
           path = args.shift || abort(PATH_ARG)
 
-          counter = Octocounter::Counter.new(path)
+          counter = Octocounter::Counter.new(path, options.all)
 
           counter.print_to_screen
         end

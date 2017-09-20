@@ -6,12 +6,13 @@ module Octocounter
 
     REGEX_PATH = %r{/\/$/}
 
-    attr_accessor :path, :list
+    attr_accessor :path, :list, :all
 
-    def initialize(path)
+    def initialize(path, all)
       path = "#{path}/" unless path =~ REGEX_PATH
       @path = path
       @list = []
+      @all = all
     end
 
     def calculate
@@ -53,9 +54,16 @@ module Octocounter
     end
 
     def print_to_screen
-      rows = calculate.map do |item|
-        [item[:files], content(item), item[:count]]
-      end
+      rows =
+        if all
+          calculate.map do |item|
+            [item[:files], content(item), item[:count]]
+          end
+        else
+          item = calculate.inject { |memo, i| memo && (memo[:count] > i[:count]) ? memo : i }
+          [[item[:files], content(item), item[:count]]]
+        end
+
       puts Terminal::Table.new headings: ["Files", "Content", "Count"], rows: rows, style: { all_separators: true }
     end
   end
