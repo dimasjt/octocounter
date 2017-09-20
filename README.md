@@ -3,11 +3,11 @@
 
 ## Installation
 
-$ gem install octocounter
+`$ gem install octocounter`
 
 ## Usage
 
-$ octocounter path/to/directory
+`$ octocounter path/to/directory`
 
 ## Result
 
